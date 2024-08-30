@@ -11,8 +11,6 @@ class Main {
     }
 
     init() {
-        // do something here
-        // attach eventListener
         this.addEventListeners();
     }
 
