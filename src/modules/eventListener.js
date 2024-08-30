@@ -1,15 +1,18 @@
+import DOM from "./dom";
+
 class EventListener {
-    addListener({ element, event, func }) {
+    constructor() {
+        this.dom = new DOM();
+    }
+
+    addListener({ element, event, func, toBind }) {
         if (element) {
             element.addEventListener(event, async (e) => {
-                try {
-                    e.preventDefault();
-                    const location = DOM.getElementValue("#location");
-                    if (location) {
-                        await func(location);
-                    }
-                } catch (error) {
-                    console.log(error);
+                e.preventDefault();
+                const location = this.dom.getElementValue("#location");
+                if (location) {
+                    const bindedFunc = func.bind(toBind);
+                    bindedFunc(location);
                 }
             });
         }
